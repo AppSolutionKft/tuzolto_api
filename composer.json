@@ -1,0 +1,28 @@
+{
+  "name": "as/tuzolto_api",
+  "description": "Tuzolto riaszto rendszer API",
+  "type": "project",
+  "require": {
+    "firebase/php-jwt": "^5.2",
+    "ext-json": "*",
+    "ext-dom": "*",
+    "ext-pdo": "*",
+    "ext-imap": "*",
+    "ext-mbstring": "*",
+    "ext-curl": "*",
+    "kreait/firebase-php": "^5.26"
+  },
+  "authors": [
+    {
+      "name": "Mihaly Szabo",
+      "email": "mihaly.szabo@appsolution.hu"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "App\\": ""
+    }
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}

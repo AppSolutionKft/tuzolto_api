@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteRule ^([A-Za-z0-9-_]+)$ index.php?module=$1 [QSA]
+RewriteRule ^([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)/?$ index.php?module=$1&aid=$2 [QSA]
+RewriteRule ^([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)/?$ index.php?module=$1&aid=$2&aid2=$3 [QSA]
+RewriteRule ^([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)/?$ index.php?module=$1&aid=$2&aid2=$3&aid3=$4 [QSA]
+RewriteRule ^([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)/?$ index.php?module=$1&aid=$2&aid2=$3&aid3=$4&aid4=$5 [QSA]
+
+
+RewriteCond %{SERVER_PORT} 80
+RewriteRule ^(.*)$ https://%{SERVER_NAME}/$1 [R,L]
