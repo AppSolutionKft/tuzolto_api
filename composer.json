@@ -3,14 +3,14 @@
   "description": "Tuzolto riaszto rendszer API",
   "type": "project",
   "require": {
-    "firebase/php-jwt": "^5.2",
+    "firebase/php-jwt": "^6.3.2",
     "ext-json": "*",
     "ext-dom": "*",
     "ext-pdo": "*",
     "ext-imap": "*",
     "ext-mbstring": "*",
     "ext-curl": "*",
-    "kreait/firebase-php": "^5.26"
+    "kreait/firebase-php": "^7.12"
   },
   "authors": [
     {
