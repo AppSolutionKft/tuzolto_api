@@ -39,17 +39,9 @@ class FCM
                 $sendReport = ($factory->createMessaging())->sendMulticast($message, $ktokens);
                 foreach ($sendReport->successes()->getItems() as $sItem) {
                     file_put_contents('error.log', json_encode($sItem->message()->jsonSerialize()) . "\r\n", FILE_APPEND);
-                    try {
-                        $token = $sItem->message()->jsonSerialize()["token"];
-                    } catch (\Exception $e) {
-                    }
                 }
                 foreach ($sendReport->failures()->getItems() as $sItem) {
-                    file_put_contents('error.log', json_encode($sItem->message()->jsonSerialize()) . "\r\n", FILE_APPEND);
-                    try {
-                        $token = $sItem->message()->jsonSerialize()["token"];
-                    } catch (\Exception $e) {
-                    }
+                    file_put_contents('error.log', json_encode($sItem->error()->getMessage()) . "\r\n", FILE_APPEND);
                 }
                 $success = $sendReport->successes()->count();
                 $result = array(
