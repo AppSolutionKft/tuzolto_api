@@ -33,22 +33,20 @@ class FCM
                 $sToken[0] = $uTokens;
             }
             foreach ($sToken as $ktokens) {
-                file_put_contents('error.log', "ktokens: " . json_encode($ktokens) . "\r\n", FILE_APPEND);
 
                 $message = new RawMessageFromArray($fields);
                 $sendReport = ($factory->createMessaging())->sendMulticast($message, $ktokens);
-                foreach ($sendReport->successes()->getItems() as $sItem) {
-                    file_put_contents('error.log', json_encode($sItem->message()->jsonSerialize()) . "\r\n", FILE_APPEND);
-                }
+//                foreach ($sendReport->successes()->getItems() as $sItem) {
+//                    file_put_contents('error.log', json_encode($sItem->message()->jsonSerialize()) . "\r\n", FILE_APPEND);
+//                }
                 foreach ($sendReport->failures()->getItems() as $sItem) {
-                    file_put_contents('error.log', json_encode($sItem->error()->getMessage()) . "\r\n", FILE_APPEND);
+                    file_put_contents('error.log', date('Y-m-d H:i:s') . ' notification error: ' . json_encode($sItem->error()->getMessage()) . "\r\n", FILE_APPEND);
                 }
                 $success = $sendReport->successes()->count();
                 $result = array(
                     'success' => $sendReport->successes()->count(),
                     'failed' => $sendReport->failures()->count(),
                 );
-                file_put_contents('error.log', json_encode($result) . "\r\n", FILE_APPEND);
             }
         } catch (\Exception $e) {
             file_put_contents('error.log', $e->getMessage() . "\r\n", FILE_APPEND);
