@@ -11,11 +11,11 @@ class Core
     const MAINTENANCE = false;
 
     private $dbconfig = array(
-        "host" => "mariadb103.r3.websupport.hu",
-        "database" => "tuzolto_db",
-        "user" => "tuzolto_db",
-        "pw" => "Gl2;U=U1+y",
-        "port" => 3313
+        "host" => "mariadb105.r3.websupport.hu",
+        "database" => "tuzolto_test",
+        "user" => "vm079ne1",
+        "pw" => "Jn2CgW,4&7",
+        "port" => 3315
     );
     const firebaseServerKey = "AAAAR6zuwiA:APA91bErq8ueBfeDie_lkOAbw4xg3UZzGjgqXYxk4p68V9pWO1Fix3kZv5WWTRHTu7hJSt_SvH1JjZe1DjPz9t9au9A_HmMX2LO9jjKbnIiBclq2f8PcfVnlbXxU3ec0fQ28LTFXRTQk";
 
