@@ -10,7 +10,13 @@ class Core
 {
     const MAINTENANCE = false;
 
-    private $dbconfig;
+    private $dbconfig = array(
+        "host" => "mariadb105.r3.websupport.hu",
+        "database" => "tuzolto_test",
+        "user" => "vm079ne1",
+        "pw" => "Jn2CgW,4&7",
+        "port" => 3315
+    );
     const firebaseServerKey = "AAAAR6zuwiA:APA91bErq8ueBfeDie_lkOAbw4xg3UZzGjgqXYxk4p68V9pWO1Fix3kZv5WWTRHTu7hJSt_SvH1JjZe1DjPz9t9au9A_HmMX2LO9jjKbnIiBclq2f8PcfVnlbXxU3ec0fQ28LTFXRTQk";
 
     protected $method;
@@ -20,13 +26,6 @@ class Core
 
     protected function __dbconnect()
     {
-        $this->dbconfig = [
-            "host" => $_ENV["DB_HOST"],
-            "database" => $_ENV["DB_NAME"],
-            "user" => $_ENV["DB_USER"],
-            "pw" => $_ENV["DB_PASSWORD"],
-            "port" => $_ENV["DB_PORT"]
-        ];
         $dsn = "mysql:host={$this->dbconfig['host']};dbname={$this->dbconfig['database']};port={$this->dbconfig['port']}";
         $this->DB = new PDO($dsn, $this->dbconfig["user"], $this->dbconfig["pw"], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'set names utf8'));
     }
@@ -101,7 +100,7 @@ class Core
 
     private function _cleanInputs($data)
     {
-        $clean_input = array();
+        $clean_input = Array();
         if (is_array($data)) {
             foreach ($data as $k => $v) {
                 $clean_input[$k] = $this->_cleanInputs($v);
@@ -128,13 +127,10 @@ class Core
         }
     }
 
-    public static function fcm_send($fields)
-    {
+    public static function fcm_send($fields){
         return FCM::sendNotification(array($fields['to']), $fields);
     }
-
-    public static function fcm_send_legacy($fields)
-    {
+    public static function fcm_send_legacy($fields){
 
         $headers = array('Authorization: key=' . self::firebaseServerKey, 'Content-Type: application/json');
         $url = "https://fcm.googleapis.com/fcm/send";
@@ -149,7 +145,7 @@ class Core
         $result = curl_exec($ch);
         curl_close($ch);
 
-        file_put_contents(BASE_DIR . "/log/log_" . date("Ymd") . ".json", "NOTIFICATION_ATTEMPT: " . date("Ymd-his") . "_" . json_encode($fields) . "_" . "RESULT: " . $result . "\r\n", FILE_APPEND);
+        file_put_contents(BASE_DIR . "/log/log_" . date("Ymd") . ".json", "NOTIFICATION_ATTEMPT: " . date("Ymd-his") . "_" . json_encode($fields) . "_" . "RESULT: ". $result . "\r\n", FILE_APPEND);
 
         return json_decode($result, true);
     }
