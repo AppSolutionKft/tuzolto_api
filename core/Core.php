@@ -10,13 +10,7 @@ class Core
 {
     const MAINTENANCE = false;
 
-    private $dbconfig = array(
-        "host" => "mariadb105.r3.websupport.hu",
-        "database" => "tuzolto_test",
-        "user" => "vm079ne1",
-        "pw" => "Jn2CgW,4&7",
-        "port" => 3315
-    );
+    private $dbconfig;
     const firebaseServerKey = "AAAAR6zuwiA:APA91bErq8ueBfeDie_lkOAbw4xg3UZzGjgqXYxk4p68V9pWO1Fix3kZv5WWTRHTu7hJSt_SvH1JjZe1DjPz9t9au9A_HmMX2LO9jjKbnIiBclq2f8PcfVnlbXxU3ec0fQ28LTFXRTQk";
 
     protected $method;
@@ -26,6 +20,13 @@ class Core
 
     protected function __dbconnect()
     {
+        $this->dbconfig = [
+            "host" => $_ENV["DB_HOST"],
+            "database" => $_ENV["DB_NAME"],
+            "user" => $_ENV["DB_USER"],
+            "pw" => $_ENV["DB_PASSWORD"],
+            "port" => $_ENV["DB_PORT"]
+        ];
         $dsn = "mysql:host={$this->dbconfig['host']};dbname={$this->dbconfig['database']};port={$this->dbconfig['port']}";
         $this->DB = new PDO($dsn, $this->dbconfig["user"], $this->dbconfig["pw"], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'set names utf8'));
     }
