@@ -11,6 +11,9 @@ define("BASE_DIR", __DIR__);
 define("HOME_DIR", "/");
 
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
 try {
     $engine = new AppEngine();
     echo $engine->createResponse();
