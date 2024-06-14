@@ -63,6 +63,7 @@ class OrganizationsController extends Core implements CRUDControllerInterface
             if($member['id'] == 1) {
                 continue;
             }
+            $member['id'] = strval($member['id']);
             if(empty($member['username'])) {
                 $member['username'] = $member['email'];
             }
@@ -71,6 +72,9 @@ class OrganizationsController extends Core implements CRUDControllerInterface
             $get_schedule = $db->prepare("SELECT `day`, start as `from`, `end` as `to` FROM user_schedules WHERE user_id = ? AND `type` = 'standby'");
             $get_schedule->execute(array($member["id"]));
             while ($sched = $get_schedule->fetch(PDO::FETCH_ASSOC)) {
+                $sched['day'] = strval(  $sched['day'] );
+                $sched['from'] = strval(  $sched['from'] );
+                $sched['to'] = strval(  $sched['to'] );
                 $member["schedule"][] = $sched;
             }
             $members[] = $member;

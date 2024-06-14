@@ -213,6 +213,8 @@ class IncidentsController extends Core implements CRUDControllerInterface
         $get_statuses->execute(array($this->request["aid"]));
         $statuses = [];
         while($member = $get_statuses->fetch(PDO::FETCH_ASSOC)) {
+            $member['id'] = strval($member['id']);
+            $member['commander'] = strval($member['commander']);
             if(empty($member['username'])) {
                 $member['username'] = $member['email'];
             }
