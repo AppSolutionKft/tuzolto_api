@@ -49,7 +49,12 @@ class EventsController extends Core implements CRUDControllerInterface
         $db = $this->DB;
         $get_event_members = $db->prepare("SELECT u.id, u.username, u.type as commander FROM user_events ue LEFT JOIN users u ON ue.user_id = u.id WHERE event_id = ?");
         $get_event_members->execute(array($this->request["aid"]));
-        $statuses = $get_event_members->fetchAll(PDO::FETCH_ASSOC);
+        $statuses = [];
+        while($row = $get_event_members->fetch(PDO::FETCH_ASSOC)) {
+            $row['id'] = strval($row['id']);
+            $row['commander'] = strval($row['commander']);
+            $statuses[] = $row;
+        }
         return $this->_response(array("code" => 200, "status" => "SUCCESS", "data" => array("statuses" => $statuses)));
     }
 

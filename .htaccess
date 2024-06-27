@@ -8,10 +8,3 @@ RewriteRule ^([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)/([A-Za-z0-9-_]+)
 
 RewriteCond %{SERVER_PORT} 80
 RewriteRule ^(.*)$ https://%{SERVER_NAME}/$1 [R,L]
-
-
-<Files .env>
-    order allow,deny
-    Deny from all
-</Files>
-

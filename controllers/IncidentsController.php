@@ -49,6 +49,8 @@ class IncidentsController extends Core implements CRUDControllerInterface
             $row["active"] = strval($row["active"]);
             $row["lat"] = strval($row["lat"]);
             $row["lng"] = strval($row["lng"]);
+            $row["life_danger"] = strval($row["life_danger"]);
+            $row["sirens"] = strval($row["sirens"]);
             $row["participants"] = strval($row["participants"]);
 
             $incidents[] = $row;
@@ -74,6 +76,8 @@ class IncidentsController extends Core implements CRUDControllerInterface
                 $ev["active"] = strval($ev["active"]);
                 $ev["lat"] = strval($ev["lat"]);
                 $ev["lng"] = strval($ev["lng"]);
+                $ev["sirens"] = strval($ev["sirens"]);
+                $ev["life_danger"] = strval($ev["life_danger"]);
                 $ev["participants"] = strval($ev["participants"]);
 
                 $events [] = $ev;
