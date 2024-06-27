@@ -52,7 +52,7 @@ class ProfileController extends Core implements CRUDControllerInterface
                 $item = strval($item);
             });
             return $this->_response(array("code" => 200, "status" => "SUCCESS", "data" => array("user" => $user_info)));
-        } catch(\Exception $e){
+        } catch (\Exception $e) {
             return $this->_response(array("code" => 500, "status" => "SUCCESS", "data" => array("message" => $e->getMessage())));
 
         }
@@ -153,14 +153,18 @@ class ProfileController extends Core implements CRUDControllerInterface
     {
         $db = $this->DB;
         $user = $this->getCurrentUser();
-        $del_from_inc = $db->prepare("DELETE FROM user_incidents WHERE user_id = ?");
-        $del_from_inc->execute(array($user["id"]));
-        $del_from_events = $db->prepare("DELETE FROM user_events WHERE user_id = ?");
-        $del_from_events->execute(array($user["id"]));
-        $del_from_org = $db->prepare("DELETE FROM user_organizations WHERE user_id = ?");
-        $del_from_org->execute(array($user["id"]));
-        $del_user = $db->prepare("DELETE FROM users WHERE id = ?");
-        $del_user->execute(array($user["id"]));
-        return $this->_response(array("code" => 200, "status" => "SUCCESS"));
+        if ($user) {
+            $del_from_inc = $db->prepare("DELETE FROM user_incidents WHERE user_id = ?");
+            $del_from_inc->execute(array($user["id"]));
+            $del_from_events = $db->prepare("DELETE FROM user_events WHERE user_id = ?");
+            $del_from_events->execute(array($user["id"]));
+            $del_from_org = $db->prepare("DELETE FROM user_organizations WHERE user_id = ?");
+            $del_from_org->execute(array($user["id"]));
+            $del_user = $db->prepare("DELETE FROM users WHERE id = ?");
+            $del_user->execute(array($user["id"]));
+            return $this->_response(array("code" => 200, "status" => "SUCCESS"));
+        } else {
+            return $this->_response(array("code" => 404, "status" => "NOT_FOUND_USER"));
+        }
     }
 }
